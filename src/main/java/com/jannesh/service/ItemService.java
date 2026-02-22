@@ -3,13 +3,10 @@ package com.jannesh.service;
 import com.jannesh.dto.item.ItemDTO;
 import com.jannesh.dto.item.SaveItemDTO;
 import com.jannesh.entity.Item;
-import com.jannesh.entity.Vendor;
-import com.jannesh.entity.Warehouse;
 import com.jannesh.repository.ItemRepository;
 import com.jannesh.util.mapper.ItemMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -49,5 +46,9 @@ public class ItemService {
 
         item.setDiscount(discount);
         return mapper.toDTO(itemRepo.save(item));
+    }
+
+    public boolean existsByItemId(UUID itemId) {
+        return itemRepo.existsById(itemId);
     }
 }
