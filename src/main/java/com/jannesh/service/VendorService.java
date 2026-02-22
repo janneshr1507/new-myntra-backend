@@ -25,12 +25,8 @@ public class VendorService {
     }
 
     public VendorDTO createVendor(SaveVendorDTO requestDTO) {
-        try {
-            Vendor vendor = mapper.toEntity(requestDTO);
-            return mapper.toDTO(vendorRepo.save(vendor));
-        } catch (DataIntegrityViolationException ex) {
-            throw new RuntimeException("Vendor with that name already exists");
-        }
+        Vendor vendor = mapper.toEntity(requestDTO);
+        return mapper.toDTO(vendorRepo.save(vendor));
     }
 
     public boolean existsByVendorId(UUID vendorId) {

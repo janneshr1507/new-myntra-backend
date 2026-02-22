@@ -51,4 +51,8 @@ public class WarehouseService {
 
         return warehouseDTOList;
     }
+
+    public boolean existsByVendorIdAndWarehouseId(UUID vendorId, UUID warehouseId) {
+        return warehouseRepo.existsByVendorIdAndWarehouseId(vendorId, warehouseId);
+    }
 }

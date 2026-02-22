@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface WarehouseRepository extends JpaRepository<Warehouse, UUID> {
     boolean existsByVendorIdAndPincode(UUID vendorId, String pincode);
     List<Warehouse> findByVendorId(UUID vendorId);
+    boolean existsByVendorIdAndWarehouseId(UUID vendorId, UUID warehouseId);
+
 }
