@@ -27,4 +27,8 @@ public class CustomerService {
                 .orElseThrow(() -> new EntityNotFoundException("Customer Not Found"));
         return mapper.toDTO(customer);
     }
+
+    public boolean existsByCustomerId(UUID customerId) {
+        return customerRepo.existsById(customerId);
+    }
 }
