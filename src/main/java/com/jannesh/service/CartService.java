@@ -139,6 +139,20 @@ public class CartService {
         cart.setTotalAmount(totalAmount);
     }
 
+    public CartDTO fetchCartDetails(UUID cartId) {
+        Cart cart = cartRepo.findById(cartId)
+                .orElseThrow(() -> new EntityNotFoundException("Cart Not Found"));
+        return mapper.toDTO(cart);
+    }
+
+    public void updateCartStatus(CartDTO cartDTO) {
+        Cart cart = cartRepo.findById(cartDTO.getCartId())
+                .orElseThrow(() -> new EntityNotFoundException("Cart Not Found"));
+
+        cart.setCartStatus(cartDTO.getCartStatus());
+        cartRepo.save(cart);
+    }
+
     /*public void calculateCartAmountWhenItemRemove(Cart cart, CartItem cartItem) {
         BigDecimal totalMRP = cart.getTotalMRP().subtract(cartItem.getItem().getActualPrice());
         BigDecimal totalDiscount = cart.getTotalDiscount().subtract(cartItem.getItem().getActualPrice().subtract(cartItem.getItem().getSellingPrice()));
