@@ -1,9 +1,9 @@
 package com.jannesh.service;
 
 import com.jannesh.dto.cartItem.CartItemDTO;
+import com.jannesh.dto.order.OrderDTO;
 import com.jannesh.dto.payment.PaymentDTO;
 import com.jannesh.dto.cart.CartDTO;
-import com.jannesh.entity.CartItem;
 import com.jannesh.entity.Order;
 import com.jannesh.entity.OrderItem;
 import com.jannesh.entity.Payment;
@@ -47,7 +47,7 @@ public class PaymentService {
         order.setTotalMRP(cartDTO.getTotalMRP());
         order.setTotalDiscount(cartDTO.getTotalDiscount());
         order.setTotalAmount(cartDTO.getTotalAmount());
-        Order savedOrder = orderService.createOrder(order);
+        OrderDTO savedOrder = orderService.createOrder(order);
 
         List<CartItemDTO> cartItemListDTO = cartItemService.fetchCartItemDetailsByCartId(cartId);
         for (CartItemDTO cartItemDTO: cartItemListDTO) {
@@ -57,11 +57,12 @@ public class PaymentService {
             orderItemService.createOrderItem(orderItem);
         }
 
+        payment.setOrderId(savedOrder.getOrderId());
         return mapper.toDTO(paymentRepo.save(payment));
     }
 
     private void mapToOrder(OrderItem orderItem, CartItemDTO cartItemDTO) {
-        orderItem.setItem(cartItemDTO.getItemId());
+        orderItem.setItemId(cartItemDTO.getItemId());
         orderItem.setQuantity(cartItemDTO.getQuantity());
         orderItem.setAmount(cartItemDTO.getAmount());
     }

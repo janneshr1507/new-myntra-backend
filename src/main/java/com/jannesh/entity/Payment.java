@@ -19,6 +19,9 @@ public class Payment {
     private UUID cartId;
 
     @Column(nullable = false)
+    private UUID orderId;
+
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)

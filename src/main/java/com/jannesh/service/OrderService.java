@@ -20,9 +20,9 @@ public class OrderService {
     private final OrderItemService orderItemService;
     private final OrderMapper mapper;
 
-    public Order createOrder(Order order) {
-        orderRepo.save(order);
-        return order;
+    public OrderDTO createOrder(Order order) {
+        Order savedOrder = orderRepo.save(order);
+        return mapper.toDTO(order);
     }
 
     @Transactional

@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter @Setter
-@JsonPropertyOrder({"paymentId","cartId","amount","paymentStatus","createdAt"})
+@JsonPropertyOrder({"paymentId","cartId","orderId","amount","paymentStatus","createdAt"})
 public class PaymentDTO {
     private UUID paymentId;
     private UUID cartId;
+    private UUID orderId;
     private BigDecimal amount;
     private PaymentStatus paymentStatus;
     private LocalDateTime createdAt;
